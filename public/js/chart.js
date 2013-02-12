@@ -4,20 +4,24 @@
   window.GV.chart = {
     currentKey: "",
     chartContainer: {},
+    usMap: {},
     textLabels: {},
     barHolders: {},
     bars: {},
     dataSource: {},
     labels: [],
     entireUS: [],
+
+    redColor: "#9e000c",
+
     keys: {
       state: 0,
       abbr: 1,
       totalMurders: 2,
       gunKill2011: 3,
       gunKill2010: 4,
-      change: 5,
-      gunKillPerAll: 6,
+      // change: 5,
+      // gunKillPerAll: 6,
       gunKillPerCap: 7,
       gunRobbPerCap: 8,
       gunAssaultPerCap: 9
@@ -39,15 +43,20 @@
 
       this.buildButtons();
       this.buildChart();
+      this.buildMap();
       this.display('gunAssaultPerCap');
     },
 
+    buildMap: function () {
+      this.usMap = d3.select("#us-map");
+    },
+
     buildButtons: function () {
-      _.each(_.keys(this.keys), _.bind(function (key) {
-        $('#right-col').append("<button class=\"switcher\" data-key=\"" + key + "\">" + this.labels[this.keys[key]] + "</button>");
+      _.each(_.keys(_.omit(this.keys, ["state", "abbr"])), _.bind(function (key) {
+        $('#buttons-container').append("<button class=\"switcher\" data-key=\"" + key + "\">" + this.labels[this.keys[key]] + "</button>");
       }, this));
 
-      $('#right-col button').click(function () {
+      $('#buttons-container button').click(function () {
         window.GV.chart.display($(this).data('key'));
       });
     },
@@ -65,7 +74,8 @@
 
       this.barHolders.append("svg").append("rect")
         .attr("class", "bar").attr("height", "30")
-        .attr("fill", "#9e000c");
+        .attr("fill", this.redColor)
+        .attr("width", 0);
 
       this.bars       = this.chartContainer.selectAll(".bar");
       this.textLabels = this.chartContainer.selectAll('.label');
@@ -87,6 +97,23 @@
       //   return b[position] - a[position];
       // });
 
+      _.each(this.dataSource, function (item) {
+        var state = item[this.keys.abbr];
+        if (state) {
+          var svg = d3.select('#' + state);
+          state = state.toUpperCase();
+
+          svg
+          .transition()
+          .duration(1000)
+          .delay(Math.random() + 0.5)
+          .attr('fill', this.redColor)
+          .attr("opacity", function (data) {
+            return (item[position] / max) + 0.3;
+          });
+        }
+      }, this);
+
       this.textLabels.text(function (data, index) {
         return data[0] + " (" + data[position] + ")";
       });
@@ -94,13 +121,13 @@
       this.bars
         .transition().duration(1000)
         .delay(function (data, index) {
-          return Math.abs(((index + 1) * 0.03));
+          return Math.abs(((index + 1) * 0.07));
         })
         .attr("width", function (data) {
           return (data[position] / max) * 100 + "%";
         })
         .attr("opacity", function (data) {
-          return (data[position] / max) + 0.09;
+          return (data[position] / max) + 0.3;
         });
     }
 

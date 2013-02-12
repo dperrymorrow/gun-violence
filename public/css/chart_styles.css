@@ -1,13 +1,29 @@
 html {
   text-align:center;
   width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #efefef;
+  height: auto;
 }
 
 body {
   display:inline-block;
-  width: 800px;
-  background-color: #efefef;
+  width: 990px;
+  background-color: white;
+  vertical-align: bottom;
+  height:auto;
+  padding: 0;
+  margin: 0;
+
+  -webkit-box-shadow: 0px 0px 10px 0px #999; /* Android 2.3+, iOS 4.0.2-4.2, Safari 3-4 */
+          box-shadow: 0px 0px 10px 0px #999; /* Chrome 6+, Firefox 4+, IE 9+, iOS 5+, Opera 10.50+ */
 }
+
+#map-container, #buttons-container {
+  margin-bottom: 60px;
+}
+
 .bar-container {
   text-align: left;
   display: inline-block;
@@ -18,7 +34,6 @@ body {
   width: 49%;
   margin-right: 1%;
   background-color: #efefef;
-
 }
 
 .bar-container .bar {
@@ -33,7 +48,7 @@ body {
 .bar-container .label {
   line-height: 30px;
   text-indent: 10px;
-  text-shadow: 0px 0px 5px #000;
+  text-shadow: 0px 0px 2px #000;
   color: white;
   font-family: "Helvetica", Arial, sans-serif;
   position: absolute;
@@ -41,14 +56,8 @@ body {
   top: 0;
 }
 
-#graph-container {
-  padding: 5px;
+#contentContainer {
+  padding: 40px;
   display: block;
   height: auto;
-  background-color: white;
-  vertical-align: bottom;
-  overflow: hidden;
-
-  -webkit-box-shadow: 0px 0px 10px 0px #999; /* Android 2.3+, iOS 4.0.2-4.2, Safari 3-4 */
-          box-shadow: 0px 0px 10px 0px #999; /* Chrome 6+, Firefox 4+, IE 9+, iOS 5+, Opera 10.50+ */
 }
