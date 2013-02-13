@@ -100,14 +100,13 @@
       _.each(this.dataSource, function (item) {
         var state = item[this.keys.abbr];
         if (state) {
-          var svg = d3.select('#' + state);
-          state = state.toUpperCase();
-
-          svg
-          .transition()
-          .duration(1000)
-          .delay(Math.random() + 0.5)
-          .attr('fill', this.redColor)
+          var stateLi = _.first(d3.select('.' + state.toLowerCase()));
+          console.log(stateLi)
+          stateLi
+          // .transition()
+          // .duration(1000)
+          // .delay(Math.random() + 0.5)
+          .attr('color', this.redColor)
           .attr("opacity", function (data) {
             return (item[position] / max) + 0.3;
           });
