@@ -31,7 +31,7 @@
       $.ajax({
         type: "get",
         success: $.proxy(this, 'build'),
-        url: "data/stats.min.json"
+        url: "data/stats.json"
       });
     },
 
