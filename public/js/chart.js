@@ -93,23 +93,21 @@
         return parseInt(data, 10);
       });
 
-      // this.barHolders.sort(function (a, b) {
-      //   return b[position] - a[position];
-      // });
+      this.barHolders.sort(function (a, b) {
+        return b[position] - a[position];
+      });
 
       _.each(this.dataSource, function (item) {
         var state = item[this.keys.abbr];
         if (state) {
-          var stateLi = _.first(d3.select('.' + state.toLowerCase()));
-          console.log(stateLi)
+          var stateLi = d3.select('.' + state.toLowerCase()),
+            opacity = (item[position] / max) + 0.3;
+
           stateLi
-          // .transition()
-          // .duration(1000)
-          // .delay(Math.random() + 0.5)
-          .attr('color', this.redColor)
-          .attr("opacity", function (data) {
-            return (item[position] / max) + 0.3;
-          });
+            .transition()
+            .duration(1000)
+            .delay(Math.random() + 0.5)
+            .attr('style', "color:" + this.redColor + ";opacity:" + opacity);
         }
       }, this);
 
@@ -129,6 +127,5 @@
           return (data[position] / max) + 0.3;
         });
     }
-
   };
 }());

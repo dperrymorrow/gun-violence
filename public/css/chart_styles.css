@@ -23,9 +23,9 @@ body {
 
 .stately {
   background: transparent;
-  width: 400px;     /* width and font size must match */
-  height: 300px;
-  font-size: 400px; /*width and font size must match */
+  width: 800px;     /* width and font size must match */
+  height: 600px;
+  font-size: 800px; /*width and font size must match */
   color: #ccc;
   border: none;
 }
